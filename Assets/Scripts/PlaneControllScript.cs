@@ -34,7 +34,17 @@ public class PlaneControllScript : MonoBehaviour {
             transform.GetChild(0).Rotate(new Vector3(0, 0, -20));
             angle -= 20;
         }
-        Debug.Log(angle);
-        
+        Debug.Log(angle); 
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Nou");
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Dou");
+        Destroy(gameObject);
     }
 }
