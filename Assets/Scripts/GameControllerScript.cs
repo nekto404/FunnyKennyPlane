@@ -6,6 +6,8 @@ public class GameControllerScript : MonoBehaviour {
 
   
     PlaneControllScript planeControll;
+
+    public float gameTime=0;
 	// Use this for initialization
 	void Start () {
         planeControll = GameObject.Find("Plane").GetComponent<PlaneControllScript>();
@@ -13,18 +15,16 @@ public class GameControllerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        gameTime += Time.deltaTime;
 	}
 
     public void OnClickDown()
     {
-        Debug.Log("1");
         planeControll.Down();
     }
 
     public void OnClickUp()
     {
-        Debug.Log("2");
         planeControll.Up();
     }
 }
