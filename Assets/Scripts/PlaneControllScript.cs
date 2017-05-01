@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class PlaneControllScript : MonoBehaviour {
 
     public int angle;
+    public float timeToEnd = 2f;
 
+    private bool end = false;
 	// Use this for initialization
 	void Start () {
 		
@@ -15,6 +17,14 @@ public class PlaneControllScript : MonoBehaviour {
 	void Update () {
         float speed = angle * Time.deltaTime/20;
         transform.Translate(new Vector3(0, speed, 0));
+        if (end)
+        {
+            timeToEnd -= Time.deltaTime;
+            if (timeToEnd<0)
+            {
+                EndGame();
+            }
+        }
 	}
 
     public void Up()
@@ -41,6 +51,12 @@ public class PlaneControllScript : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(gameObject);
+        GameObject.Find("GameOver").transform.Translate(new Vector3(0, 0, -25));
+        end = true;
+    }
+
+    void EndGame()
+    {
+        SceneManager.LoadScene(0);
     }
 }

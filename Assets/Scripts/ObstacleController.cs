@@ -11,6 +11,7 @@ public class ObstacleController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         gameControllerScript = GameObject.Find("GameController").GetComponent<GameControllerScript>();
+        Destroy(gameObject,10);
 	}
 	
 	// Update is called once per frame

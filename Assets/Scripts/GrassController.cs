@@ -21,8 +21,7 @@ public class GrassController : MonoBehaviour {
         transform.Translate(new Vector3(-curentSpeed, 0, 0));
         if (transform.position.x < -17.75f)
         {
-            Debug.Log("just");
-            transform.Translate(new Vector3(17.75f * 2 * startSpeed / Mathf.Abs(startSpeed), 0, 0));
+            transform.Translate(new Vector3(17.75f * 2 * curentSpeed / Mathf.Abs(curentSpeed), 0, 0));
         }
     }
 }
