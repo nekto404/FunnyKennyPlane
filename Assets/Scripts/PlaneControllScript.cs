@@ -8,6 +8,7 @@ public class PlaneControllScript : MonoBehaviour {
     public GameControllerScript gameControllerScript;
     public GameObject expoSystem;
 
+   
 
     // Use this for initialization
     void Start () {
@@ -42,13 +43,31 @@ public class PlaneControllScript : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        angle = -60;
-        gameControllerScript.End();
+        ObstacleController obstacle = collision.gameObject.GetComponent<ObstacleController>();
+        CointController coint = collision.gameObject.GetComponent<CointController>();
+        GrassController grass = collision.gameObject.GetComponent<GrassController>();
+
+        if (obstacle != null)
+        {
+            angle = -60;
+            gameControllerScript.End();
+        }
+        else if (coint != null)
+        {
+            gameControllerScript.AddScore(coint.value);
+            coint.desroyCoint();
+        }
+        else if (grass != null)
+        {
+            angle = -60;
+            gameControllerScript.End();
+        }
     }
 
     public void DestroyPlane()
     {
-        GameObject rock = Instantiate(expoSystem, transform.position, Quaternion.identity) as GameObject;
+        
+       GameObject rock = Instantiate(expoSystem, transform.position, Quaternion.identity) as GameObject;
         Destroy(gameObject);
     }
 }

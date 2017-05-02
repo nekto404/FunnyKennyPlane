@@ -63,5 +63,9 @@ public class GameControllerScript : MonoBehaviour {
         SceneManager.LoadScene(0);
     }
 
+    public void AddScore(int value)
+    {
+        gameSource += value * 100;
+    }
 
 }
