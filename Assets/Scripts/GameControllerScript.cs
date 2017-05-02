@@ -1,22 +1,45 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameControllerScript : MonoBehaviour {
 
   
     PlaneControllScript planeControll;
+    public float gameSource=0f;
+    GameObject sourceL;
 
     public float gameTime=0;
-	// Use this for initialization
-	void Start () {
+    public float timeToEnd = 2f;
+    private bool end = false;
+
+    // Use this for initialization
+    void Start () {
         planeControll = GameObject.Find("Plane").GetComponent<PlaneControllScript>();
-	}
+        sourceL = GameObject.Find("Score");
+    }
 	
 	// Update is called once per frame
 	void Update () {
         gameTime += Time.deltaTime;
-	}
+
+        if (end)
+        {
+            timeToEnd -= Time.deltaTime;
+            if (timeToEnd < 0)
+            {
+                EndGame();
+            }
+        }
+        else
+        {
+            gameSource += Time.deltaTime * 100;
+            sourceL.GetComponent<Text>().text = Math.Round(gameSource) + "";
+        }
+    }
 
     public void OnClickDown()
     {
@@ -27,4 +50,18 @@ public class GameControllerScript : MonoBehaviour {
     {
         planeControll.Up();
     }
+
+    public void End()
+    {
+        GameObject.Find("GameOver").transform.Translate(new Vector3(0, 0, -25)); 
+        end =true;
+        planeControll.DestroyPlane();
+    }
+
+    void EndGame()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+
 }
