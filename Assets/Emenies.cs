@@ -23,4 +23,9 @@ public class Emenies : MonoBehaviour {
             Enemy.GetComponent<FlyEnemy>().minHeight = minHeight;
         }
     }
+
+    void SpawnEnemy()
+    {
+
+    }
 }

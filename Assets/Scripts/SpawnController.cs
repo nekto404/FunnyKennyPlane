@@ -19,13 +19,17 @@ public class SpawnController : MonoBehaviour {
     public GameObject silver_coint;
     public GameObject bronze_coint;
 
+    public GameObject FlyEnemyPrefab;
+
     public float rocksH=3.6f;
     public float workSpaceH=6f;
 
     private float curentSpawnTime;
     private float curentRange;
     private float timeInterval=10f;
-    private byte state=0;
+    private int state=0;
+
+    private int flyEnemySpawns=0;
     // Use this for initialization
     void Start () {
         gameControllerScript = GameObject.Find("GameController").GetComponent<GameControllerScript>();
@@ -38,6 +42,7 @@ public class SpawnController : MonoBehaviour {
         timeInterval += Time.deltaTime;
         if (timeInterval>= curentSpawnTime)
         {
+            state = Random.Range(0, 3);
             switch (state)
                 {
                 case 0:
@@ -47,15 +52,17 @@ public class SpawnController : MonoBehaviour {
                         curentRange -= incRange;
                     timeInterval = 0;
                     SpawnRocks();
-                    state = 1;
                     break;
                 case 1:
                     timeInterval = 0;
                     SpawnCoin();
-                    state = 0;
                     break;
-            }
-              
+                case 2:
+                    timeInterval = 0;
+                    SpawnEnemy(Random.Range(0,flyEnemySpawns/5)+1);
+                    flyEnemySpawns++;
+                    break;
+            }     
         }   
 	}
 
@@ -85,6 +92,20 @@ public class SpawnController : MonoBehaviour {
         else
         {
             Instantiate(bronze_coint, spawnPos, Quaternion.identity);
+        }
+    }
+
+    void SpawnEnemy(int EnemiesCount)
+    {
+        for (int i = 0; i < EnemiesCount; i++)
+        {
+            float maxHeight = Random.Range(0, workSpaceH / 2);
+            float minHeight = Random.Range(-workSpaceH / 2, 0);
+            float shift = Random.Range(minHeight, maxHeight);
+            Vector3 spawnPos = new Vector3(transform.position.x+3*i, transform.position.y - shift, transform.position.z);
+            GameObject Enemy = Instantiate(FlyEnemyPrefab, spawnPos, Quaternion.identity) as GameObject;
+            Enemy.GetComponent<FlyEnemy>().maxHeight = maxHeight;
+            Enemy.GetComponent<FlyEnemy>().minHeight = minHeight;
         }
     }
 }
