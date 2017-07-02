@@ -7,14 +7,21 @@ using UnityEngine.SceneManagement;
 
 public class GameControllerScript : MonoBehaviour {
 
-  
-    PlaneControllScript planeControll;
-    public float gameSource=0f;
-    GameObject sourceL;
+    public ButtonHandlerScript ButtonDown;
+    public ButtonHandlerScript ButtonUp;
+    public float ButtonCheckTime=0.2f;
+    private float _curentButtonCheckTime=0f;
+    
 
+    public float gameSource=0f;
     public float gameTime=0;
+    GameObject sourceL;
     public float timeToEnd = 2f;
+
     private bool end = false;
+
+    PlaneControllScript planeControll;
+
 
     // Use this for initialization
     void Start () {
@@ -39,16 +46,39 @@ public class GameControllerScript : MonoBehaviour {
             gameSource += Time.deltaTime * 100;
             sourceL.GetComponent<Text>().text = Math.Round(gameSource) + "";
         }
+
+        if (planeControll != null)
+        {
+            if (_curentButtonCheckTime < 0)
+            {
+                if (ButtonDown.IsPressed ^ ButtonUp.IsPressed)
+                {
+                    if (ButtonDown.IsPressed)
+                    {
+                        planeControll.Down(5);
+                        _curentButtonCheckTime = ButtonCheckTime;
+                    }
+                    else
+                    {
+                        planeControll.Up(5);
+                        _curentButtonCheckTime = ButtonCheckTime;
+                    }
+                }
+            }
+            else
+                _curentButtonCheckTime -= Time.deltaTime;
+        }
+
+
+
     }
 
     public void OnClickDown()
     {
-        planeControll.Down();
     }
 
     public void OnClickUp()
     {
-        planeControll.Up();
     }
 
     public void End()

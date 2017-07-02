@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlaneControllScript : MonoBehaviour {
 
-    public int angle;
+    public float angle;
     public GameControllerScript gameControllerScript;
     public GameObject expoSystem;
 
@@ -21,22 +21,22 @@ public class PlaneControllScript : MonoBehaviour {
         transform.Translate(new Vector3(0, speed, 0));
     }
 
-    public void Up()
+    public void Up(float rotAngle)
     {
         if (angle < 60)
         {
-            transform.GetChild(0).Rotate(new Vector3(0, 0, 20));
-            angle += 20;
+            transform.GetChild(0).Rotate(new Vector3(0, 0, rotAngle));
+            angle += rotAngle;
         }
         Debug.Log(angle);
     }
 
-    public void Down()
+    public void Down(float rotAngle)
     {
         if (angle > -60)
         {
-            transform.GetChild(0).Rotate(new Vector3(0, 0, -20));
-            angle -= 20;
+            transform.GetChild(0).Rotate(new Vector3(0, 0, -rotAngle));
+            angle -= rotAngle;
         }
         Debug.Log(angle); 
     }

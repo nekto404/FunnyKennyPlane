@@ -64,9 +64,9 @@ public class SpawnController : MonoBehaviour {
         float length = rocksH + curentRange / 2;
         float shift = Random.Range(-(workSpaceH - curentRange)/2, (workSpaceH - curentRange) / 2); 
         Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y -length-shift, transform.position.z);
-        GameObject rock = Instantiate(rockPrefab, spawnPos, Quaternion.identity) as GameObject;
+        Instantiate(rockPrefab, spawnPos, Quaternion.identity);
         spawnPos = new Vector3(transform.position.x, transform.position.y + length-shift, transform.position.z);
-        GameObject rockDown = Instantiate(rockDownPrefab, spawnPos, Quaternion.identity) as GameObject;
+        Instantiate(rockDownPrefab, spawnPos, Quaternion.identity);
     }
 
     void SpawnCoin()
@@ -76,15 +76,15 @@ public class SpawnController : MonoBehaviour {
         Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y - shift, transform.position.z);
         if (chanse > 95)
         {
-            GameObject coint = Instantiate(gold_coint, spawnPos, Quaternion.identity) as GameObject;
+           Instantiate(gold_coint, spawnPos, Quaternion.identity);
         }
         else if (chanse > 80)
         {
-            GameObject coint = Instantiate(silver_coint, spawnPos, Quaternion.identity) as GameObject;
+            Instantiate(silver_coint, spawnPos, Quaternion.identity);
         }
         else
         {
-            GameObject coint = Instantiate(bronze_coint, spawnPos, Quaternion.identity) as GameObject;
+            Instantiate(bronze_coint, spawnPos, Quaternion.identity);
         }
     }
 }
