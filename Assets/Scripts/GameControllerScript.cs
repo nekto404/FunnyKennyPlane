@@ -15,8 +15,11 @@ public class GameControllerScript : MonoBehaviour {
 
     public float gameSource=0f;
     public float gameTime=0;
+    public int coins;
+
     GameObject sourceL;
     public float timeToEnd = 2f;
+
 
     private bool end = false;
 
@@ -55,12 +58,12 @@ public class GameControllerScript : MonoBehaviour {
                 {
                     if (ButtonDown.IsPressed)
                     {
-                        planeControll.Down(5);
+                        planeControll.Down();
                         _curentButtonCheckTime = ButtonCheckTime;
                     }
                     else
                     {
-                        planeControll.Up(5);
+                        planeControll.Up();
                         _curentButtonCheckTime = ButtonCheckTime;
                     }
                 }
@@ -93,9 +96,10 @@ public class GameControllerScript : MonoBehaviour {
         SceneManager.LoadScene(0);
     }
 
-    public void AddScore(int value)
+    public void AddCoins(int value)
     {
         gameSource += value * 100;
+        coins += value;
     }
 
 }

@@ -8,7 +8,8 @@ public class PlaneControllScript : MonoBehaviour {
     public GameControllerScript gameControllerScript;
     public GameObject expoSystem;
 
-   
+    public float maxAngle =60f;
+    public float stepRotation =5f;
 
     // Use this for initialization
     void Start () {
@@ -21,22 +22,22 @@ public class PlaneControllScript : MonoBehaviour {
         transform.Translate(new Vector3(0, speed, 0));
     }
 
-    public void Up(float rotAngle)
+    public void Up()
     {
-        if (angle < 60)
+        if (angle < maxAngle)
         {
-            transform.GetChild(0).Rotate(new Vector3(0, 0, rotAngle));
-            angle += rotAngle;
+            transform.GetChild(0).Rotate(new Vector3(0, 0, stepRotation));
+            angle += stepRotation;
         }
         Debug.Log(angle);
     }
 
-    public void Down(float rotAngle)
+    public void Down()
     {
-        if (angle > -60)
+        if (angle > -maxAngle)
         {
-            transform.GetChild(0).Rotate(new Vector3(0, 0, -rotAngle));
-            angle -= rotAngle;
+            transform.GetChild(0).Rotate(new Vector3(0, 0, -stepRotation));
+            angle -= stepRotation;
         }
         Debug.Log(angle); 
     }
@@ -54,7 +55,7 @@ public class PlaneControllScript : MonoBehaviour {
         }
         else if (coint != null)
         {
-            gameControllerScript.AddScore(coint.value);
+            gameControllerScript.AddCoins(coint.value);
             coint.desroyCoint();
         }
         else if (grass != null)
