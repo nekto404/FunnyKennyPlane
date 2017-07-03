@@ -21,6 +21,8 @@ public class SpawnController : MonoBehaviour {
 
     public GameObject FlyEnemyPrefab;
 
+    public GameObject SignalLights;
+
     public float rocksH=3.6f;
     public float workSpaceH=6f;
 
@@ -42,7 +44,7 @@ public class SpawnController : MonoBehaviour {
         timeInterval += Time.deltaTime;
         if (timeInterval>= curentSpawnTime)
         {
-            state = Random.Range(0, 3);
+            state = 0;// Random.Range(0, 3);
             switch (state)
                 {
                 case 0:
@@ -74,6 +76,7 @@ public class SpawnController : MonoBehaviour {
         Instantiate(rockPrefab, spawnPos, Quaternion.identity);
         spawnPos = new Vector3(transform.position.x, transform.position.y + length-shift, transform.position.z);
         Instantiate(rockDownPrefab, spawnPos, Quaternion.identity);
+        SignalLights.GetComponent<SingnalLights>().ShowWrning(transform.position.y  - curentRange /2 - shift, transform.position.y + curentRange / 2 - shift);
     }
 
     void SpawnCoin()
@@ -103,9 +106,9 @@ public class SpawnController : MonoBehaviour {
             float minHeight = Random.Range(-workSpaceH / 2, 0);
             float shift = Random.Range(minHeight, maxHeight);
             Vector3 spawnPos = new Vector3(transform.position.x+3*i, transform.position.y - shift, transform.position.z);
-            GameObject Enemy = Instantiate(FlyEnemyPrefab, spawnPos, Quaternion.identity) as GameObject;
-            Enemy.GetComponent<FlyEnemy>().maxHeight = maxHeight;
-            Enemy.GetComponent<FlyEnemy>().minHeight = minHeight;
+            GameObject enemy = Instantiate(FlyEnemyPrefab, spawnPos, Quaternion.identity) as GameObject;
+            enemy.GetComponent<FlyEnemy>().maxHeight = maxHeight;
+            enemy.GetComponent<FlyEnemy>().minHeight = minHeight;
         }
     }
 }
