@@ -16,7 +16,7 @@ public class NumberSpace : MonoBehaviour {
             if (Number.ToString().Length > i)
             {
                 Cells[i].SetActive(true);
-                Cells[i].GetComponent<Image>().overrideSprite = Resources.Load<Sprite>("Splines/UI/Numbers/number" + Number.ToString().Substring(i, 1));
+                Cells[i].GetComponent<Image>().overrideSprite = Resources.Load<Sprite>("Sprites/UI/Numbers/number" + Number.ToString().Substring(i, 1));
             }
         }
     }
