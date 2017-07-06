@@ -66,9 +66,8 @@ public class PlaneControllScript : MonoBehaviour {
     }
 
     public void DestroyPlane()
-    {
-        
-       GameObject rock = Instantiate(expoSystem, transform.position, Quaternion.identity) as GameObject;
+    {   
+       Instantiate(expoSystem, transform.position, Quaternion.identity);
        Destroy(gameObject);
     }
 }

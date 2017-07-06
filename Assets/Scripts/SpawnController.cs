@@ -42,30 +42,33 @@ public class SpawnController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         timeInterval += Time.deltaTime;
-        if (timeInterval>= curentSpawnTime)
-        {
-            state = 0;// Random.Range(0, 3);
-            switch (state)
-                {
-                case 0:
-                    if (minSpawnTime < curentSpawnTime)
-                        curentSpawnTime -= incTime;
-                    if (minRange < curentRange)
-                        curentRange -= incRange;
-                    timeInterval = 0;
-                    SpawnRocks();
-                    break;
-                case 1:
-                    timeInterval = 0;
-                    SpawnCoin();
-                    break;
-                case 2:
-                    timeInterval = 0;
-                    SpawnEnemy(Random.Range(0,flyEnemySpawns/5)+1);
-                    flyEnemySpawns++;
-                    break;
-            }     
-        }   
+	    if (!gameControllerScript.getEnd())
+	    {
+	        if (timeInterval >= curentSpawnTime)
+	        {
+	            state =  Random.Range(0, 3);
+	            switch (state)
+	            {
+	                case 0:
+	                    if (minSpawnTime < curentSpawnTime)
+	                        curentSpawnTime -= incTime;
+	                    if (minRange < curentRange)
+	                        curentRange -= incRange;
+	                    timeInterval = 0;
+	                    SpawnRocks();
+	                    break;
+	                case 1:
+	                    timeInterval = 0;
+	                    SpawnCoin();
+	                    break;
+	                case 2:
+	                    timeInterval = 0;
+	                    SpawnEnemy(Random.Range(0, flyEnemySpawns / 5) + 1);
+	                    flyEnemySpawns++;
+	                    break;
+	            }
+	        }
+	    }
 	}
 
     void SpawnRocks()

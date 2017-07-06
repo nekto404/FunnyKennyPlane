@@ -16,7 +16,10 @@ public class ObstacleController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        float curentSpeed = startSpeed+increaseSpeed*gameControllerScript.gameTime;
-        transform.Translate(new Vector3(-curentSpeed,0,0));
-    }
+	    if (!gameControllerScript.getEnd())
+	    {
+	        float curentSpeed = startSpeed + increaseSpeed * gameControllerScript.gameTime;
+	        transform.Translate(new Vector3(-curentSpeed, 0, 0));
+	    }
+	}
 }

@@ -10,6 +10,8 @@ public class GameControllerScript : MonoBehaviour {
     public ButtonHandlerScript ButtonDown;
     public ButtonHandlerScript ButtonUp;
     public float ButtonCheckTime=0.2f;
+
+
     private float _curentButtonCheckTime=0f;
     
 
@@ -25,6 +27,9 @@ public class GameControllerScript : MonoBehaviour {
 
     PlaneControllScript planeControll;
 
+    public GameObject GameOverLayer;
+    public GameObject CoinsText;
+    public GameObject ScoreText;
 
     // Use this for initialization
     void Start () {
@@ -41,7 +46,7 @@ public class GameControllerScript : MonoBehaviour {
             timeToEnd -= Time.deltaTime;
             if (timeToEnd < 0)
             {
-                EndGame();
+                ShowGameOverLayer();
             }
         }
         else
@@ -76,30 +81,38 @@ public class GameControllerScript : MonoBehaviour {
 
     }
 
-    public void OnClickDown()
+    void ShowGameOverLayer()
     {
-    }
-
-    public void OnClickUp()
-    {
+        CoinsText.GetComponent<Text>().text = "Coins: "+coins;
+        ScoreText.GetComponent<Text>().text = "Source: " + Math.Round(gameSource);
+        GameOverLayer.SetActive(true);
     }
 
     public void End()
     {
-        GameObject.Find("GameOver").transform.Translate(new Vector3(0, 0, -25)); 
         end =true;
         planeControll.DestroyPlane();
     }
 
-    void EndGame()
+    public void EndGame()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void Replay()
+    {
+        SceneManager.LoadScene(1);
     }
 
     public void AddCoins(int value)
     {
         gameSource += value * 100;
         coins += value;
+    }
+
+    public bool getEnd()
+    {
+        return end;
     }
 
 }
