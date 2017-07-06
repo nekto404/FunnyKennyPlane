@@ -14,15 +14,12 @@ public class BackgroundController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    if (!gameControllerScript.getEnd())
-	    {
-	        transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));
+	    if (gameControllerScript.getEnd() || gameControllerScript.getPause()) return;
+	    transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));
 
-	        if (transform.position.x < -17.775f)
-	        {
-	            Debug.Log("just");
-	            transform.Translate(new Vector3(17.775f * 2, 0, 0));
-	        }
+	    if (transform.position.x < -17.775f)
+	    {
+	        transform.Translate(new Vector3(17.775f * 2, 0, 0));
 	    }
 	}
 }

@@ -24,12 +24,15 @@ public class GameControllerScript : MonoBehaviour {
 
 
     private bool end = false;
+    private bool pause = false;
 
     PlaneControllScript planeControll;
 
     public GameObject GameOverLayer;
     public GameObject CoinsText;
     public GameObject ScoreText;
+
+    public GameObject GamePauseLayer;
 
     // Use this for initialization
     void Start () {
@@ -49,7 +52,7 @@ public class GameControllerScript : MonoBehaviour {
                 ShowGameOverLayer();
             }
         }
-        else
+        else if (!pause)
         {
             gameSource += Time.deltaTime * 100;
             sourceL.GetComponent<Text>().text = Math.Round(gameSource) + "";
@@ -110,9 +113,28 @@ public class GameControllerScript : MonoBehaviour {
         coins += value;
     }
 
+    public void GamePause()
+    {
+        if (!end)
+        {
+            pause = true;
+            GamePauseLayer.SetActive(true);
+        }
+    }
+
+    public void GameResume()
+    {
+        pause = false;
+        GamePauseLayer.SetActive(false);
+    }
+
     public bool getEnd()
     {
         return end;
     }
 
+    public bool getPause()
+    {
+        return pause;
+    }
 }

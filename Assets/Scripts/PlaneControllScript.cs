@@ -18,6 +18,7 @@ public class PlaneControllScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (gameControllerScript.getEnd() || gameControllerScript.getPause()) return;
         float speed = angle * Time.deltaTime/20;
         transform.Translate(new Vector3(0, speed, 0));
     }
