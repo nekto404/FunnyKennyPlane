@@ -15,11 +15,11 @@ public class GameControllerScript : MonoBehaviour {
     private float _curentButtonCheckTime=0f;
     
 
-    public float gameSource=0f;
+    public float gameScore=0f;
     public float gameTime=0;
     public int coins;
 
-    GameObject sourceL;
+    public GameObject scoreL;
     public float timeToEnd = 2f;
 
 
@@ -34,10 +34,15 @@ public class GameControllerScript : MonoBehaviour {
 
     public GameObject GamePauseLayer;
 
+    private int[] _upgrades = {0,0,0,0,0};
+    private int _coins;
+    private int _maxResult;
+
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
+        InitValue();
         planeControll = GameObject.Find("Plane").GetComponent<PlaneControllScript>();
-        sourceL = GameObject.Find("Score");
     }
 	
 	// Update is called once per frame
@@ -54,8 +59,8 @@ public class GameControllerScript : MonoBehaviour {
         }
         else if (!pause)
         {
-            gameSource += Time.deltaTime * 100;
-            sourceL.GetComponent<Text>().text = Math.Round(gameSource) + "";
+            gameScore += Time.deltaTime * 100;
+            scoreL.GetComponent<Text>().text = Math.Round(gameScore) + "";
         }
 
         if (planeControll != null)
@@ -87,7 +92,7 @@ public class GameControllerScript : MonoBehaviour {
     void ShowGameOverLayer()
     {
         CoinsText.GetComponent<Text>().text = "Coins: "+coins;
-        ScoreText.GetComponent<Text>().text = "Source: " + Math.Round(gameSource);
+        ScoreText.GetComponent<Text>().text = "Score: " + Math.Round(gameScore);
         GameOverLayer.SetActive(true);
     }
 
@@ -99,6 +104,13 @@ public class GameControllerScript : MonoBehaviour {
 
     public void EndGame()
     {
+        _coins += coins;
+        PlayerPrefs.SetInt("Coins", _coins);
+        if ((int)Math.Round(gameScore) > _maxResult)
+        {
+            _maxResult = (int)Math.Round(gameScore);
+            PlayerPrefs.SetInt("MaxResult",_maxResult);
+        }
         SceneManager.LoadScene(0);
     }
 
@@ -109,7 +121,7 @@ public class GameControllerScript : MonoBehaviour {
 
     public void AddCoins(int value)
     {
-        gameSource += value * 100;
+        gameScore += value * 100;
         coins += value;
     }
 
@@ -136,5 +148,41 @@ public class GameControllerScript : MonoBehaviour {
     public bool getPause()
     {
         return pause;
+    }
+
+    public void InitValue()
+    {
+        if (PlayerPrefs.HasKey("MaxResult"))
+        {
+            _maxResult = PlayerPrefs.GetInt("MaxResult");
+        }
+        else
+        {
+            _maxResult = 0;
+            PlayerPrefs.SetInt("MaxResult", _maxResult);
+        }
+
+        if (PlayerPrefs.HasKey("Coins"))
+        {
+            _coins = PlayerPrefs.GetInt("Coins");
+        }
+        else
+        {
+            _coins = 0;
+            PlayerPrefs.SetInt("Coins", _coins);
+        }
+
+        for (int i = 0; i < 5; i++)
+        {
+            if (PlayerPrefs.HasKey("Upgrade" + i))
+            {
+                _upgrades[i] = PlayerPrefs.GetInt("Upgrade" + i);
+            }
+            else
+            {
+                _upgrades[i] = 0;
+                PlayerPrefs.SetInt("Upgrade" + i, _upgrades[i]);
+            }
+        }
     }
 }

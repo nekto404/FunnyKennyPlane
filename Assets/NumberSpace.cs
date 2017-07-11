@@ -8,9 +8,8 @@ public class NumberSpace : MonoBehaviour {
     public int Number;
     public GameObject[] Cells;
 
-    public void Start()
-    {
-        
+    public void Show()
+    {  
         for (int i=0; i < Cells.Length; i++)
         {
             if (Number.ToString().Length > i)
