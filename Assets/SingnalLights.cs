@@ -7,15 +7,16 @@ public class SingnalLights : MonoBehaviour
 
     public GameObject WarningPrefab;
 
-    public void ShowWrning(float minH, float maxH)
+    public void ShowWrning(float minH, float maxH, float size)
     {
         float curentH = -4;
         while (curentH < 5)
         {
-            if ((curentH-0.5 > maxH) || (curentH + 0.5 < minH))
+            if ((curentH- size/2 > maxH) || (curentH + size/2 < minH))
             {
                 Vector3 pos = new Vector3(transform.position.x, transform.position.y + curentH, transform.position.z);
-                Instantiate(WarningPrefab, pos, Quaternion.identity);
+                GameObject light = Instantiate(WarningPrefab, pos, Quaternion.identity) as GameObject;
+                light.transform.localScale.Set(size,size,size);
             }
             curentH += 1f;
         }

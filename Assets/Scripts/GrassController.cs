@@ -19,7 +19,7 @@ public class GrassController : MonoBehaviour {
     {
         if (gameControllerScript.getEnd() || gameControllerScript.getPause()) return;
 
-        float curentSpeed = startSpeed + increaseSpeed * gameControllerScript.gameTime;
+        float curentSpeed = startSpeed + (increaseSpeed * gameControllerScript.gameTime)/(1+0.2f*gameControllerScript.GetUpgrate(1));
         transform.Translate(new Vector3(-curentSpeed, 0, 0));
         if (transform.position.x < -17.75f)
         {

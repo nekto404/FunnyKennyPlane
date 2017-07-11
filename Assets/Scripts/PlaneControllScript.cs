@@ -8,9 +8,6 @@ public class PlaneControllScript : MonoBehaviour {
     public GameControllerScript gameControllerScript;
     public GameObject expoSystem;
 
-    public float maxAngle =60f;
-    public float stepRotation =5f;
-
     // Use this for initialization
     void Start () {
         gameControllerScript = GameObject.Find("GameController").GetComponent<GameControllerScript>();
@@ -23,7 +20,7 @@ public class PlaneControllScript : MonoBehaviour {
         transform.Translate(new Vector3(0, speed, 0));
     }
 
-    public void Up()
+    public void Up(float maxAngle, float stepRotation)
     {
         if (angle < maxAngle)
         {
@@ -33,7 +30,7 @@ public class PlaneControllScript : MonoBehaviour {
         Debug.Log(angle);
     }
 
-    public void Down()
+    public void Down(float maxAngle, float stepRotation)
     {
         if (angle > -maxAngle)
         {

@@ -71,12 +71,12 @@ public class GameControllerScript : MonoBehaviour {
                 {
                     if (ButtonDown.IsPressed)
                     {
-                        planeControll.Down();
+                        planeControll.Down(50 + _upgrades[0] * 3f, 2 +_upgrades[0]*0.1f);
                         _curentButtonCheckTime = ButtonCheckTime;
                     }
                     else
                     {
-                        planeControll.Up();
+                        planeControll.Up(50 + _upgrades[0] * 3f, 2 + _upgrades[0] * 0.1f);
                         _curentButtonCheckTime = ButtonCheckTime;
                     }
                 }
@@ -128,8 +128,8 @@ public class GameControllerScript : MonoBehaviour {
 
     public void AddCoins(int value)
     {
-        gameScore += value * 100;
-        coins += value;
+        gameScore += (int)Math.Round(value * 100*(1+0.5*_upgrades[2]));
+        coins += (int)Math.Round(value * (1 + 0.5 * _upgrades[2])); ;
     }
 
     public void GamePause()
@@ -191,5 +191,10 @@ public class GameControllerScript : MonoBehaviour {
                 PlayerPrefs.SetInt("Upgrade" + i, _upgrades[i]);
             }
         }
+    }
+
+    public int GetUpgrate(int index)
+    {
+        return _upgrades[index];
     }
 }

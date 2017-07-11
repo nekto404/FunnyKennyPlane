@@ -44,7 +44,23 @@ public class SpawnController : MonoBehaviour {
         if (gameControllerScript.getEnd() || gameControllerScript.getPause()) return;
         timeInterval += Time.deltaTime;
 	    if (!(timeInterval >= curentSpawnTime)) return;
-	    state = Random.Range(0, 3);
+
+	    int randomRange = 10 + 10 + 5 + 2 * gameControllerScript.GetUpgrate(4);
+	    int randomValue = Random.Range(0, randomRange);
+
+	    if (randomValue < 10)
+	    {
+	        state = 0;
+	    }
+        else if (randomValue < 20)
+	    {
+	        state = 1;
+	    }
+	    else
+	    {
+	        state = 2;
+	    }
+
 	    switch (state)
 	    {
 	        case 0:
@@ -56,14 +72,14 @@ public class SpawnController : MonoBehaviour {
 	            SpawnRocks();
 	            break;
 	        case 1:
-	            timeInterval = 0;
-	            SpawnCoin();
-	            break;
+                timeInterval = 0;
+                SpawnEnemy(Random.Range(0, flyEnemySpawns / 5) + 1);
+                flyEnemySpawns++;
+                break;
 	        case 2:
-	            timeInterval = 0;
-	            SpawnEnemy(Random.Range(0, flyEnemySpawns / 5) + 1);
-	            flyEnemySpawns++;
-	            break;
+                timeInterval = 0;
+                SpawnCoin();
+                break;
 	    }
 	}
 
@@ -75,7 +91,13 @@ public class SpawnController : MonoBehaviour {
         Instantiate(rockPrefab, spawnPos, Quaternion.identity);
         spawnPos = new Vector3(transform.position.x, transform.position.y + length-shift, transform.position.z);
         Instantiate(rockDownPrefab, spawnPos, Quaternion.identity);
-        SignalLights.GetComponent<SingnalLights>().ShowWrning(transform.position.y  - curentRange /2 - shift, transform.position.y + curentRange / 2 - shift);
+
+        if (gameControllerScript.GetUpgrate(3) > 0)
+        {
+            SignalLights.GetComponent<SingnalLights>()
+                .ShowWrning(transform.position.y - curentRange / 2 - shift,
+                    transform.position.y + curentRange / 2 - shift, 2 / (gameControllerScript.GetUpgrate(3)-1));
+        }
     }
 
     void SpawnCoin()
