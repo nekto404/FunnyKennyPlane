@@ -37,11 +37,23 @@ public class menuConttroller : MonoBehaviour
         Application.Quit();
     }
 
-    public void Upgrade(int upgradeIndex)
+    public void Upgrade(int upgradeIndex, int price)
     {
-        _upgrades[upgradeIndex]++;
-        PlayerPrefs.SetInt("Upgrade" + upgradeIndex, _upgrades[upgradeIndex]);
-        Elements[upgradeIndex].SetValue(_upgrades[upgradeIndex]);
+        if (_coins >= price)
+        {
+            _coins -= price;
+            PlayerPrefs.SetInt("Coins",_coins);
+            CoinsSpace.Number = _coins;
+            CoinsSpace.Show();
+            _upgrades[upgradeIndex]++;
+            PlayerPrefs.SetInt("Upgrade" + upgradeIndex, _upgrades[upgradeIndex]);
+            Elements[upgradeIndex].SetValue(_upgrades[upgradeIndex]);
+
+            for (int i = 0; i < Elements.Length; i++)
+            {
+                Elements[i].CheckPrice(_coins);
+            }
+        }
     }
 
     public void InitValue()
@@ -89,6 +101,7 @@ public class menuConttroller : MonoBehaviour
         for (int i = 0; i < Elements.Length; i++)
         {
             Elements[i].SetValue(_upgrades[i]);
+            Elements[i].CheckPrice(_coins);
         }
     }
 }

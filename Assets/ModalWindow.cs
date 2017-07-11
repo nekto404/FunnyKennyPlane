@@ -10,6 +10,7 @@ public class ModalWindow : MonoBehaviour
     public Text PText;
     public Text PTitle;
     public int Index;
+    public int Price;
     public menuConttroller MenuConttroller;
 
     public void Show()
@@ -30,7 +31,7 @@ public class ModalWindow : MonoBehaviour
 
     public void OkButton()
     {
-        MenuConttroller.Upgrade(Index);
+        MenuConttroller.Upgrade(Index,Price);
         gameObject.SetActive(false);
     }
 }

@@ -116,6 +116,13 @@ public class GameControllerScript : MonoBehaviour {
 
     public void Replay()
     {
+        _coins += coins;
+        PlayerPrefs.SetInt("Coins", _coins);
+        if ((int)Math.Round(gameScore) > _maxResult)
+        {
+            _maxResult = (int)Math.Round(gameScore);
+            PlayerPrefs.SetInt("MaxResult", _maxResult);
+        }
         SceneManager.LoadScene(1);
     }
 
