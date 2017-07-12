@@ -92,7 +92,7 @@ public class menuConttroller : MonoBehaviour
         }
     }
 
-    void ShowInfo()
+    public void ShowInfo()
     {
         CoinsSpace.Number = _coins;
         CoinsSpace.Show();

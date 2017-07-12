@@ -17,6 +17,7 @@ public class UpgradeElement : MonoBehaviour
     public String InfoTitleText;
     public int UpgradeIndex;
     public GameObject LookUpgrade;
+    public NumberSpace PriceSpace;
 
     private int _value;
 
@@ -27,6 +28,8 @@ public class UpgradeElement : MonoBehaviour
         {
             Counter[i].SetActive(true);
         }
+        PriceSpace.Number = UpgradePrice[_value];
+        PriceSpace.Show();
     }
 
     public void UpgradeValue()
