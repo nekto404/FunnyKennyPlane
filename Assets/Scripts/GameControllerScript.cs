@@ -38,6 +38,8 @@ public class GameControllerScript : MonoBehaviour {
     private int _coins;
     private int _maxResult;
 
+    private bool _revertControll = false;
+
     // Use this for initialization
     void Start ()
     {
@@ -69,7 +71,7 @@ public class GameControllerScript : MonoBehaviour {
             {
                 if (ButtonDown.IsPressed ^ ButtonUp.IsPressed)
                 {
-                    if (ButtonDown.IsPressed)
+                    if ((ButtonDown.IsPressed && !(_revertControll)) || (ButtonUp.IsPressed && (_revertControll)))
                     {
                         planeControll.Down(50 + _upgrades[0] * 3f, 2 +_upgrades[0]*0.1f);
                         _curentButtonCheckTime = ButtonCheckTime;
@@ -196,5 +198,11 @@ public class GameControllerScript : MonoBehaviour {
     public int GetUpgrate(int index)
     {
         return _upgrades[index];
+    }
+
+    public bool RevertControll()
+    {
+        _revertControll = !(_revertControll);
+        return _revertControll;
     }
 }
