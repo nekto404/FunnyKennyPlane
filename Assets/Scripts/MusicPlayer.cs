@@ -12,6 +12,14 @@ public class MusicPlayer : MonoBehaviour {
         _musicPlayer = gameObject.GetComponent<AudioSource>();
     }
 
+    private void Update()
+    {
+        if (!MusicM.GetMusicState())
+        {
+            _musicPlayer.Stop();
+        }
+    }
+
     public void Play()
     {
         if (MusicM.GetMusicState())

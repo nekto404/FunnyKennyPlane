@@ -7,6 +7,8 @@ public class PlaneControllScript : MonoBehaviour {
     public float angle;
     public GameControllerScript gameControllerScript;
     public GameObject expoSystem;
+    public MusicPlayer ExpoMusic;
+    public MusicPlayer CoinMusic;
 
     // Use this for initialization
     void Start () {
@@ -55,6 +57,7 @@ public class PlaneControllScript : MonoBehaviour {
         {
             gameControllerScript.AddCoins(coint.value);
             coint.desroyCoint();
+            CoinMusic.Play();
         }
         else if (grass != null)
         {
@@ -67,5 +70,6 @@ public class PlaneControllScript : MonoBehaviour {
     {   
        Instantiate(expoSystem, transform.position, Quaternion.identity);
        Destroy(gameObject);
+       ExpoMusic.Play();
     }
 }
