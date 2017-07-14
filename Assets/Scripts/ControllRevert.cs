@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ControllRevert : MonoBehaviour {
+public class ControllRevert : MonoBehaviour
+{
 
     public GameControllerScript GameController;
     public Image LLArrow;
@@ -13,6 +14,11 @@ public class ControllRevert : MonoBehaviour {
     public Sprite ArrowUp;
     public Sprite ArrowDown;
 
+    void Start()
+    {
+        Init();
+    }
+
     public void RevertControll()
     {
         if (GameController.RevertControll())
@@ -21,6 +27,7 @@ public class ControllRevert : MonoBehaviour {
             LBArrow.sprite = ArrowUp;
             RLArrow.sprite = ArrowUp;
             RBArrow.sprite = ArrowDown;
+            PlayerPrefs.SetInt("RevertControl", 1);
         }
         else
         {
@@ -28,6 +35,22 @@ public class ControllRevert : MonoBehaviour {
             LBArrow.sprite = ArrowDown;
             RLArrow.sprite = ArrowDown;
             RBArrow.sprite = ArrowUp;
+            PlayerPrefs.SetInt("RevertControl", 0);
+        }
+    }
+
+    void Init()
+    {
+        if (PlayerPrefs.HasKey("RevertControl"))
+        {
+            if (PlayerPrefs.GetInt("RevertControl") == 1)
+            {
+                RevertControll();
+            }
+        }
+        else
+        {
+            PlayerPrefs.SetInt("RevertControl",0);
         }
     }
 }
