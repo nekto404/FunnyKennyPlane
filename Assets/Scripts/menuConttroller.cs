@@ -29,7 +29,7 @@ public class menuConttroller : MonoBehaviour
 
     public void StartButton ()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("Loading");
     }
 
     public void ExitButton()
