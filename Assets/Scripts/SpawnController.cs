@@ -96,7 +96,7 @@ public class SpawnController : MonoBehaviour {
         {
             SignalLights.GetComponent<SingnalLights>()
                 .ShowWrning(transform.position.y - curentRange / 2 - shift,
-                    transform.position.y + curentRange / 2 - shift, 2 / (gameControllerScript.GetUpgrate(3)-1));
+                    transform.position.y + curentRange / 2 - shift, gameControllerScript.GetUpgrate(3));
         }
     }
 
