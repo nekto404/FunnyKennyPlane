@@ -13,13 +13,13 @@ public class SingnalLights : MonoBehaviour
         float size = 2 / (value);
         while (curentH < 5)
         {
-            if ((curentH- size/2 > maxH) || (curentH + size/2 < minH))
+            if ((curentH - size/2 > maxH) || (curentH + size/2 < minH))
             {
                 Vector3 pos = new Vector3(transform.position.x, transform.position.y + curentH, transform.position.z);
                 GameObject light = Instantiate(WarningPrefab, pos, Quaternion.identity) as GameObject;
-                light.transform.localScale.Set(size,size,size);
+                light.transform.localScale = new Vector3(size, size, size);
             }
-            curentH += 1f;
+            curentH += size;
         }
     }
 }
