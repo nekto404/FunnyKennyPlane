@@ -29,7 +29,6 @@ public class PlaneControllScript : MonoBehaviour {
             transform.GetChild(0).Rotate(new Vector3(0, 0, stepRotation));
             angle += stepRotation;
         }
-        Debug.Log(angle);
     }
 
     public void Down(float maxAngle, float stepRotation)
@@ -39,7 +38,6 @@ public class PlaneControllScript : MonoBehaviour {
             transform.GetChild(0).Rotate(new Vector3(0, 0, -stepRotation));
             angle -= stepRotation;
         }
-        Debug.Log(angle); 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
