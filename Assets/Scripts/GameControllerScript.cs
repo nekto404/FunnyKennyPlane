@@ -106,7 +106,7 @@ public class GameControllerScript : MonoBehaviour {
 
     public void EndGame()
     {
-        _coins += coins+100;
+        _coins += coins;
         PlayerPrefs.SetInt("Coins", _coins);
         if ((int)Math.Round(gameScore) > _maxResult)
         {
