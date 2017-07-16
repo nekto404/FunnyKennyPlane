@@ -11,7 +11,6 @@ public class ObstacleController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         gameControllerScript = GameObject.Find("GameController").GetComponent<GameControllerScript>();
-        Destroy(gameObject,10);
 	}
 	
 	// Update is called once per frame
@@ -19,5 +18,9 @@ public class ObstacleController : MonoBehaviour {
 	    if (gameControllerScript.getEnd() || gameControllerScript.getPause()) return;
 	    float curentSpeed = startSpeed + increaseSpeed * gameControllerScript.gameTime / (1 + 0.2f * gameControllerScript.GetUpgrate(1));
 	    transform.Translate(new Vector3(-curentSpeed, 0, 0));
-	}
+        if (transform.position.x < -15f)
+        {
+            Destroy(gameObject);
+        }
+    }
 }

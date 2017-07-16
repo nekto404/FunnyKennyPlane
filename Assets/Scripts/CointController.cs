@@ -12,7 +12,6 @@ public class CointController : MonoBehaviour {
     void Start()
     {
         gameControllerScript = GameObject.Find("GameController").GetComponent<GameControllerScript>();
-        Destroy(gameObject, 10);
     }
 
     // Update is called once per frame
@@ -21,6 +20,10 @@ public class CointController : MonoBehaviour {
         if (gameControllerScript.getEnd() || gameControllerScript.getPause()) return;
         float curentSpeed = startSpeed + increaseSpeed * gameControllerScript.gameTime;
         transform.Translate(new Vector3(-curentSpeed, 0, 0));
+        if (transform.position.x < -15f)
+        {
+            desroyCoint();
+        }
     }
 
     public void desroyCoint()
