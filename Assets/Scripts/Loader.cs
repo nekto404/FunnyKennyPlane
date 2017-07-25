@@ -25,7 +25,7 @@ public class Loader : MonoBehaviour
     IEnumerator StartLoad()
     {
         yield return new WaitForSeconds(0.1f);
-        _loading = SceneManager.LoadSceneAsync("test");
+        _loading = SceneManager.LoadSceneAsync("SimpleLevel");
         _loading.allowSceneActivation = false;
         while (!_loading.isDone)
         {
